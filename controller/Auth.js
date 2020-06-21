@@ -19,7 +19,8 @@ exports.signup = async (req, res) => {
     const {
       email,
       name,
-      password
+      password,
+      role_user
     } = req.body.newData;
     //cek email
     const emailFund = await User.findOne({
@@ -33,7 +34,8 @@ exports.signup = async (req, res) => {
     const newUser = new User({
       email,
       name,
-      password
+      password,
+      role_user
     });
     await newUser.save();
     const token = signToken(newUser);

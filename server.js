@@ -14,12 +14,16 @@ const {
   showUser,
   createUser
 } = require('./controller/Users');
+const {
+  createRole,
+  indexRole
+} = require("./controller/Role");
 app.use(bodyParser.json());
 
 app.listen(port, () => {
   console.log(`server is listening on port:${port}`);
 });
-mongoose.connect("mongodb://localhost/userData", {
+mongoose.connect("mongodb://localhost/pushNode", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -47,3 +51,5 @@ app
   .put(passportJwt, updateUser)
   // DELETE
   .delete(passportJwt, deleteUser);
+app.post("/roles", passportJwt, createRole);
+app.get("/roles", passportJwt, indexRole);
