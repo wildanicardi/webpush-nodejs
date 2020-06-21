@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const port = 8000;
 const app = express();
+const keys = require('./configuration/keys');
 const {
   signup,
   login
@@ -18,12 +19,15 @@ const {
   createRole,
   indexRole
 } = require("./controller/Role");
+const {
+  subscriber
+} = require("./controller/Subscribe");
 app.use(bodyParser.json());
 
 app.listen(port, () => {
   console.log(`server is listening on port:${port}`);
 });
-mongoose.connect("mongodb://localhost/pushNode", {
+mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -53,3 +57,5 @@ app
   .delete(passportJwt, deleteUser);
 app.post("/roles", passportJwt, createRole);
 app.get("/roles", passportJwt, indexRole);
+
+app.post("/subscribe", passportJwt, subscriber);
