@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Users = mongoose.model("Users");
 
 const SubscriberSchema = new Schema({
   endpoint: {
@@ -12,6 +13,10 @@ const SubscriberSchema = new Schema({
     auth: String,
     p256dh: String
   },
+  user: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users'
+  }]
 });
 
-mongoose.model('Subscribers', SubscriberSchema, 'subscribers');
+module.exports = mongoose.model('Subscribers', SubscriberSchema);

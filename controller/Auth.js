@@ -39,16 +39,15 @@ exports.signup = async (req, res) => {
     });
     await newUser.save();
     const token = signToken(newUser);
-    res.json({
+    return res.json({
       success: true,
       access_token: token,
     });
   } catch (error) {
-    res.json({
+    return res.json({
       success: false,
       message: error,
     });
-    // console.log(error);
 
   }
 }
@@ -60,10 +59,10 @@ exports.login = async (req, res) => {
       access_token: token,
     });
   } catch (error) {
-    // res.json({
-    //   success: false,
-    //   message: error,
-    // });
+    res.json({
+      success: false,
+      message: error,
+    });
     console.log(error);
   }
 

@@ -14,11 +14,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  },
-  role_user: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Role'
-  }]
+  }
 });
 UserSchema.pre('save', async function (next) {
   try {

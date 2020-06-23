@@ -1,28 +1,38 @@
-const Subscriber = require('../models/Subscriber');
+// const mongoose = require('mongoose');
+const Subscriber = require("../models/Subscriber");
 // response function
 const sendResponse = (res, err, data) => {
   if (err) {
-    res.status(500).json({
+    return res.json({
       success: false,
       message: err,
     });
   } else if (!data) {
-    res.json({
+    return res.json({
       success: false,
-      message: 'Technical Error occured',
+      message: "Not Found",
     });
   } else {
-    res.status(200).json({
+    return res.json({
       success: true,
       data: data,
     });
   }
 }
-exports.subscriber = async (req, res) => {
-  const subscriptionModel = new Subscriber(req.body);
-  console.log("data", req.body);
+exports.indexSubscriber = (req, res) => {
+  const subscriptionModel = new Subscriber({
+    ...req.body,
+    user: [{
+      "_id": "5eee22e1d2342c0b8431e26f",
+      "email": "ali@mail.com",
+      "name": "ali",
+    }]
+  });
 
   subscriptionModel.save((err, subscription) => {
     sendResponse(res, err, subscription);
   });
+}
+exports.getSubscriber = (req, res) => {
+  return res.send("Berhasil");
 }

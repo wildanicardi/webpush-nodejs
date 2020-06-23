@@ -2,17 +2,17 @@ const Role = require('../models/Role');
 // response function
 const sendResponse = (res, err, data) => {
   if (err) {
-    res.json({
+  return res.json({
       success: false,
       message: err,
     });
   } else if (!data) {
-    res.json({
+    return res.json({
       success: false,
       message: "Not Found",
     });
   } else {
-    res.json({
+    return res.json({
       success: true,
       data: data,
     });
