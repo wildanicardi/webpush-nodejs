@@ -1,26 +1,18 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const port = 8000;
 const app = express();
-const keys = require("./configuration/keys");
+const connectionDb = require("./configuration/db");
 
 app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors());
 app.listen(port, () => {
   console.log(`server is listening on port:${port}`);
 });
-
-mongoose
-  .connect(keys.mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+connectionDb();
 
 const passport = require("passport");
 const passportConf = require("./passport");
