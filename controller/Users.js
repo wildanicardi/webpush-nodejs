@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
 // response function
 const sendResponse = (res, err, data) => {
   if (err) {
@@ -17,22 +18,24 @@ const sendResponse = (res, err, data) => {
       data: data,
     });
   }
-}
+};
 exports.index = async (req, res) => {
-  await User.find({}, (err, data) => {
+  await User.find({}).populate('role').exec((err, data) => {
     sendResponse(res, err, data);
   });
-}
+};
 exports.deleteUser = async (req, res) => {
   await User.findByIdAndDelete(req.params.id, (err, data) => {
     sendResponse(res, err, data);
   });
-}
+};
 exports.updateUser = async (req, res) => {
   await User.findByIdAndUpdate(
-    req.params.id, {
+    req.params.id,
+    {
       ...req.body.newData,
-    }, {
+    },
+    {
       new: true,
     },
     (err, data) => {
@@ -44,11 +47,12 @@ exports.showUser = async (req, res) => {
   await User.findById(req.params.id, (err, data) => {
     sendResponse(res, err, data);
   });
-}
+};
 exports.createUser = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.newData.password, 10);
 
-  await User.create({
+  await User.create(
+    {
       ...req.body.newData,
       password: hashedPassword,
     },
@@ -56,4 +60,4 @@ exports.createUser = async (req, res) => {
       sendResponse(res, err, data);
     }
   );
-}
+};

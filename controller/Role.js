@@ -28,7 +28,7 @@ exports.createRole = async (req, res) => {
       ...req.body.role,
     },
     (err, data) => {
-      sendResponse(res, err, data);
+    sendResponse(res, err, data);
     }
   );
 }

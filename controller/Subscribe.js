@@ -34,5 +34,10 @@ exports.indexSubscriber = (req, res) => {
   });
 }
 exports.getSubscriber = (req, res) => {
-  return res.send("Berhasil");
+  Subscriber.find({}).populate("user").exec((err, data) => {
+    sendResponse(res, err, data);
+  });
+  // Subscriber.find({},(err, data) => {
+  //   sendResponse(res, err, data);
+  // });
 }

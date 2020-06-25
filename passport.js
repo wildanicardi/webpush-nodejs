@@ -1,17 +1,14 @@
 const passport = require("passport");
 const jwtStrategy = require("passport-jwt").Strategy;
-const {
-  ExtractJwt
-} = require("passport-jwt");
+const { ExtractJwt } = require("passport-jwt");
 const localStrategy = require("passport-local");
-const {
-  JWT_SECRET
-} = require("./configuration/index");
+const { JWT_SECRET } = require("./configuration/index");
 const User = require("./models/User");
 
 //JSON web token strategy
 passport.use(
-  new jwtStrategy({
+  new jwtStrategy(
+    {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: JWT_SECRET,
     },
@@ -34,14 +31,15 @@ passport.use(
 
 // local strategy
 passport.use(
-  new localStrategy({
+  new localStrategy(
+    {
       usernameField: "email",
     },
     async (email, password, done) => {
       try {
         //find the user given the email
         const user = await User.findOne({
-          email
+          email,
         });
 
         //if not , handle it
@@ -55,7 +53,9 @@ passport.use(
         }
         done(null, user);
       } catch (error) {
-        done(error, false)
+        console.log(error);
+
+        done(error, false);
       }
     }
   )
