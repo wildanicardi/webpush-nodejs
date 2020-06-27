@@ -1,13 +1,13 @@
 const express = require("express");
-const path = require("path");
+const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const port = 8000;
 const app = express();
 const connectionDb = require("./configuration/db");
 
+app.use(morgan("dev"));
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.listen(port, () => {
   console.log(`server is listening on port:${port}`);
