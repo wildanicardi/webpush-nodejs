@@ -20,7 +20,7 @@ const sendResponse = (res, err, data) => {
   }
 };
 exports.index = async (req, res) => {
-  await User.find({}).populate('role').exec((err, data) => {
+  await User.find({}, (err, data) => {
     sendResponse(res, err, data);
   });
 };

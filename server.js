@@ -30,9 +30,8 @@ const {
   showUser,
   createUser,
 } = require("./controller/Users");
-const { createRole, indexRole } = require("./controller/Role");
 const { indexSubscriber, getSubscriber } = require("./controller/Subscribe");
-const { indexPush } = require("./controller/Push");
+const { indexPushLecturer } = require("./controller/Push");
 // const Subscribe = require("./models/Subscriber");
 //login
 app.post("/api/auth/login", passportLogin, login);
@@ -49,8 +48,6 @@ app
   .put(passportJwt, updateUser)
   // DELETE
   .delete(passportJwt, deleteUser);
-app.post("/api/roles", passportJwt, createRole);
-app.get("/api/roles", passportJwt, indexRole);
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
@@ -58,4 +55,4 @@ app.get("/", (req, res) => {
 app.get("/subscribe", passportJwt, getSubscriber);
 app.post("/subscribe", passportJwt, indexSubscriber);
 
-app.post("/api/push", passportJwt, indexPush);
+app.post("/api/push", passportJwt, indexPushLecturer);

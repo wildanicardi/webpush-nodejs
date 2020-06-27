@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Users = mongoose.model("Users");
 
 const SubscriberSchema = new Schema({
   endpoint: {

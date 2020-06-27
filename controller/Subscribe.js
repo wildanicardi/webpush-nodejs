@@ -18,26 +18,21 @@ const sendResponse = (res, err, data) => {
       data: data,
     });
   }
-}
+};
 exports.indexSubscriber = (req, res) => {
   const subscriptionModel = new Subscriber({
     ...req.body,
-    user: [{
-      "_id": "5eee22e1d2342c0b8431e26f",
-      "email": "ali@mail.com",
-      "name": "ali",
-    }]
+    user: req.user._id,
   });
 
   subscriptionModel.save((err, subscription) => {
     sendResponse(res, err, subscription);
   });
-}
+};
 exports.getSubscriber = (req, res) => {
-  Subscriber.find({}).populate("user").exec((err, data) => {
-    sendResponse(res, err, data);
-  });
-  // Subscriber.find({},(err, data) => {
-  //   sendResponse(res, err, data);
-  // });
-}
+  Subscriber.find({})
+    .populate("user")
+    .exec((err, data) => {
+      sendResponse(res, err, data);
+    });
+};

@@ -15,12 +15,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Roles",
-    },
-  ],
+  role: {
+    type: String,
+    required: true,
+  },
 });
 UserSchema.pre("save", async function (next) {
   try {
