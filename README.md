@@ -10,6 +10,15 @@ Use the package manager npm.
 npm install
 ```
 
+Generate vapid public and private key
+
+```bash
+./node_modules/.bin/web-push generate-vapid-keys
+```
+
+Dokumentasi Web Push Official 
+* https://developers.google.com/web/fundamentals/codelabs/push-notifications
+
 ## Usage
 
 ```node

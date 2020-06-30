@@ -19,7 +19,7 @@ const sendResponse = (res, err, data) => {
     });
   }
 };
-exports.indexSubscriber = (req, res) => {
+exports.postSubscriber = (req, res) => {
   const subscriptionModel = new Subscriber({
     ...req.body,
     user: req.user._id,
