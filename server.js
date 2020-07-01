@@ -31,7 +31,7 @@ const {
   createUser,
 } = require("./controller/Users");
 const { postSubscriber, getSubscriber } = require("./controller/Subscribe");
-const { postPush } = require("./controller/Push");
+const { postPush, postPushSpesific } = require("./controller/Push");
 // const Subscribe = require("./models/Subscriber");
 //login
 app.post("/api/auth/login", passportLogin, login);
@@ -56,3 +56,4 @@ app.get("/subscribe", passportJwt, getSubscriber);
 app.post("/subscribe", passportJwt, postSubscriber);
 
 app.post("/api/push", passportJwt, postPush);
+app.post("/api/push-spesific", passportJwt, postPushSpesific);
